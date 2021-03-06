@@ -19,10 +19,12 @@ def searchForNews(topic, driver):
     articleHeaders = []
     time.sleep(2)
     articleHeaders = driver.find_elements_by_class_name("article-card__link")
-
+    title = [articleHeader.text for articleHeader in articleHeaders]
+    links = [articleHeader.get_attribute('href') for articleHeader in articleHeaders]
+    for link in links:
+        print(link)
     for article in articleHeaders:
-        
-        print(article)
+        print(title)
 
 
 
