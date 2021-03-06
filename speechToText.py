@@ -80,34 +80,33 @@ for result in response.results:
     print("Transcript: {}".format(result.alternatives[0].transcript))
     text = result.alternatives[0].transcript
 
-# Instantiates a client
+""" Analyze Text Produced """
+
+# Instantiates a client and get text
 langClient = language_v1.LanguageServiceClient()
 encoding_type = language_v1.EncodingType.UTF8
-
-# The text to analyze
 document = language_v1.Document(content=text, type_=language_v1.Document.Type.PLAIN_TEXT)
 
-# Detects the sentiment of the text
-# sentiment = langClient.analyze_sentiment(request={'document': document}).document_sentiment
-
+# Types to analyze
+sentiment = langClient.analyze_sentiment(request={'document': document}).document_sentiment
+syntax = langClient.analyze_syntax(request = {'document': document, 'encoding_type': encoding_type})
 entities = langClient.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
-print(entities)
 
-for entity in entities.entities:
-    print('Representative name for the entity: {}'.format(entity.name))
-    print("Entity type: {}".format(language_v1.Entity.Type(entity.type_).name))
-    print("Salience score: {}".format(entity.salience))
+search = False
+noun = ""
+for token in syntax.tokens:
+    
+    if ('VERB' in str(token.part_of_speech.tag) and token.text.content == 'search'):
+        search = True
+        print("SEARCH")
+    
+    if (search == True and 'NOUN' in str(token.part_of_speech.tag)):
+        noun = token.text.content
 
-    for metadata_name, metadata_value in entity.metadata.items():
-        print(u"{}: {}".format(metadata_name, metadata_value))
+if (noun != ""):
+    for entity in entities.entities:
+        if (entity.name == noun):
+            entityType = language_v1.Entity.Type(entity.type_).name
+            salienceScore = entity.salience
 
-    for mention in entity.mentions:
-        print(u"Mention text: {}".format(mention.text.content))
 
-        # Get the mention type, e.g. PROPER for proper noun
-        print(
-            u"Mention type: {}".format(language_v1.EntityMention.Type(mention.type_).name)
-        )
-
-# print("Text: {}".format(text))
-# print("Sentiment: {}, {}".format(sentiment.score, sentiment.magnitude))
