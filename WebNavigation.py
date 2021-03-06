@@ -31,7 +31,7 @@ def searchForNews(topic, driver):
 
 
 def main():
-    driver = webdriver.Chrome(r'C:\Users\danie\dev\deltahacks\chromedriver.exe')
+    driver = webdriver.Chrome(r'C:\Users\danie\dev\deltahacks\deltahacks2021\chromedriver.exe')
 
     driver.get('https://nationalpost.com/')
     searchForNews("education", driver)
