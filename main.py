@@ -7,6 +7,7 @@ import WebNavigation as webnav
 import speechToText as stt
 import textToSpeech as tts
 import os
+import time
 
 root = tk.Tk()
 apps = []
@@ -37,11 +38,11 @@ def callback(event):
         title_ld = webnav.search_for_news(noun_word[1], info.driver)
         title_list = webnav.data_to_title_list(title_ld)
         count = 0
-        for title in title_list:
+        for title in 5:
             tts.textToSpeech(nums[count])
             tts.textToSpeech(title)
             count += 1
-            sleep(1)
+            time.sleep(1)
 
 
     if (noun_word[0] == 'read'):
@@ -78,3 +79,5 @@ canvas.pack()
 # runApps.pack()
 
 root.mainloop()
+
+
