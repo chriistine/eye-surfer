@@ -58,7 +58,7 @@ def select_news(title_link_data, selected_news_int, driver):
             article = article + refined.text
 
     article_list = []
-    if len(article) > 4400:
+    if len(article) > 4500:
         article = split_article(article)
         return article
     else:
