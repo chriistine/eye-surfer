@@ -39,15 +39,17 @@ def textToSpeech(text: str):
         # os.startfile('output.mp3')
         print('Audio content written to file "output.mp3"')
         
+    try:        
+        pygame.mixer.init()
+        pygame.mixer.music.load("output.mp3")
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy() == True:
+            continue
 
-    pygame.mixer.init()
-    pygame.mixer.music.load("output.mp3")
-    pygame.mixer.music.play()
-    while pygame.mixer.music.get_busy() == True:
-        continue
+    except KeyboardInterrupt:
+        print("Interrupted by User")
+        pygame.mixer.music.stop()
     
-     
     pygame.mixer.quit()
-    
     out.close()
     os.remove('output.mp3')

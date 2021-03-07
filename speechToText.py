@@ -100,28 +100,33 @@ def extractKeywords(text: str):
     read = False
     noun = ""
     verb = ""
+    nums = ['one', 'two', 'three', 'four', 'five']
     for token in syntax.tokens:  
-        # print(token)
-        if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'select', 'open']):
+        if (token.text.content in ["article", "articles", "news"]):
+            continue
+
+        if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'choose', 'open', 'stop']):
             read = True
             verb = token.text.content
 
-        if ('VERB' in str(token.part_of_speech.tag) and (token.text.content in ['search', 'look at','find'])):
+        if ('VERB' in str(token.part_of_speech.tag) and (token.text.content in ['search', 'look','find'])):
             verb = token.text.content
             search = True
 
-        if (read == True and 'NUM' in str(token.part_of_speech.tag)):
+        if (read == True and ('NUM' in str(token.part_of_speech.tag) or (token.text.content in nums))):
+            if (type(token.text.content) == str):
+                return [verb, nums.index(token.text.content)+1]
             return [verb, token.text.content]
         
         if ((search == True or read == True) and 'NOUN' in str(token.part_of_speech.tag)):
             noun = str(token.text.content)
 
-    if (noun != ""):
-        for entity in entities.entities:
-            if (entity.name == noun):
-                entityType = language_v1.Entity.Type(entity.type_).name
-                salienceScore = entity.salience
-    
+    # if (noun != ""):
+    #     for entity in entities.entities:
+    #         if (entity.name == noun):
+    #             entityType = language_v1.Entity.Type(entity.type_).name
+    #             salienceScore = entity.salience
+
     return [verb, noun]
 
 def main():
