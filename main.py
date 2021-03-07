@@ -13,27 +13,31 @@ import time
 root = tk.Tk()
 apps = []
 
-
 def callback(event):
-
     print("You pressed Enter")
     stt.toAudioFile()
     string_words = stt.speechToText()
     noun_word = stt.extractKeywords(string_words)
     print(noun_word)
+    opened = False
     nums = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen']
     
     if (noun_word[0] == 'open'):
+        opened = True
         info.setDriver()
         info.driver.get('https://nationalpost.com/')
+        tts.textToSpeech("Opened up windows. What would you like to do next?")
 
     if (noun_word[0] in ['search', 'look', 'find']):
+        if (noun_word[1] == ""):
+            tts.textToSpeech("Sorry I didn't get that. Can you try again?")
         info.setDriver()
         info.driver.get('https://nationalpost.com/')
         info.title_ld = webnav.search_for_news(noun_word[1], info.driver)
         title_list = webnav.data_to_title_list(info.title_ld)
         count = 0
         try:
+            tts.textToSpeech("Here are the following articles with the search {}".format(noun_word[1]))
             for title in title_list:
                 tts.textToSpeech(nums[count])
                 tts.textToSpeech(title)
@@ -46,6 +50,7 @@ def callback(event):
 
 
     if (noun_word[0] in ['choose', 'select', 'read']):
+        tts.textToSpeech("Great choice. Opening up article {}".format(noun_word[1]))
         index_news = int(noun_word[1])
         article_ls = webnav.select_news(info.title_ld, index_news, info.driver)
         for string in article_ls:
@@ -53,6 +58,7 @@ def callback(event):
 
 
     if (noun_word[0] in ['stop', 'close']):
+        tts.textToSpeech("Ok. Closing")
         webnav.close_chrome(info.driver)
 
 
@@ -87,7 +93,6 @@ my_label.pack(pady=20, padx=20, fill="both", expand=True)
 # openFile.pack()
 # runApps = tk.Button(root, text="Run Apps", padx=10, pady=5, fg="white", bg="#263D42", command=runApps)
 # runApps.pack()
-
+tts.textToSpeech("Hi Christine. What would you like to do today on the web?")
 root.mainloop()
-
 

@@ -104,7 +104,7 @@ def extractKeywords(text: str):
     verb = ""
     nums = ['one', 'two', 'three', 'four', 'five']
     for token in syntax.tokens:  
-        if (token.text.content in ["article", "articles", "news"]):
+        if (token.text.content in ["article", "articles", "news", "surfer"]):
             continue
 
         if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'choose', 'open', 'stop']):
