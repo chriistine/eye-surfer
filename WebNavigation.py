@@ -57,21 +57,23 @@ def select_news(title_link_data, selected_news_int, driver):
         for refined in refined_content:
             article = article + refined.text
 
+    article_list = []
     if len(article) > 4400:
         article = split_article(article)
-
-    print(article)
-    return article
-
+        return article
+    else:
+        article_list[0] = article 
+        return article_list
+    
 def split_article(article):
     mid_char_index = int(len(article)/2)
-    print(mid_char_index)
+    #print(mid_char_index)
     split_index = 0
     split_string = []
     for i in range(0, mid_char_index):
         if article[i + mid_char_index - 1] == '.' and ((article[i + mid_char_index] == ' ') or (article[i + mid_char_index].isupper())):
             split_index = i + mid_char_index
-            print(split_index)
+            #print(split_index)
             break
     
     split_string.append(article[:split_index])
@@ -86,7 +88,7 @@ def main():
     driver.get('https://nationalpost.com/')
     data = search_for_news("vaccine", driver)
     article = select_news(data, 0, driver)
-    print(split_article(article))
+    #split_article(article)
 
 
 
