@@ -23,8 +23,7 @@ def callback(event):
     driver.get('https://nationalpost.com/')
     title_ld = webnav.search_for_news(noun_word[1], driver)
     article_ls = webnav.select_news(title_ld, 0, driver)
-    split_art = webnav.split_article(article_ls)
-    for string in split_art:
+    for string in article_ls:
         tts.textToSpeech(string)
 
 
