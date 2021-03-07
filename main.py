@@ -66,7 +66,7 @@ class Info:
         self.driver = webdriver.Chrome(credential_path)
 
 info = Info()
-root.geometry("500x700")
+root.geometry("500x600")
 root.configure(background='white')
 root.bind('<Return>', callback)
 
@@ -74,7 +74,7 @@ root.bind('<Return>', callback)
 # canvas = tk.Canvas(root, height=700, width=700, bg="white")
 # canvas.pack()
 
-my_label = HTMLLabel(root, html='<img src="logo1.png" width="460" height="600" />')
+my_label = HTMLLabel(root, html='<img src="logo2.png" width="460" height="500" />')
 my_label['background']='white'
 my_label.pack()
 my_label.pack(pady=20, padx=20, fill="both", expand=True)
