@@ -99,12 +99,14 @@ def extractKeywords(text: str):
     search = False
     describe = False
     noun = ""
-    for token in syntax.tokens:
-        
+    verb = ""
+    for token in syntax.tokens:  
         if ('VERB' in str(token.part_of_speech.tag) and token.text.content == 'describe'):
+            verb = token.text.content
             describe = True
 
         if ('VERB' in str(token.part_of_speech.tag) and (token.text.content == 'search' or token.text.content == 'look at' or token.text.content == 'find')):
+            verb = token.text.content
             search = True
         
         if (search == True and 'NOUN' in str(token.part_of_speech.tag)):
@@ -117,5 +119,5 @@ def extractKeywords(text: str):
                 salienceScore = entity.salience
 
     
-    return noun
+    return [verb, noun]
 
