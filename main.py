@@ -5,29 +5,12 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import WebNavigation as webnav
 import speechToText as stt
+import textToSpeech as tts
 import os
 
 root = tk.Tk()
 apps = []
 
-def addApp():
-
-    for widget in frame.winfo_children():
-        widget.destroy()
-
-    filename= filedialog.askopenfilename(initialdir="/", title="Select File", 
-                                        filetypes=(("executables", "*.exe"), ("all files", "*.*")))
-    apps.append(filename)
-    print(filename)
-    for app in apps:
-        label = tk.Label(frame, text=app, bg="gray")
-        label.pack()
-
-def runApps():
-    credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
-    driver = webdriver.Chrome(credential_path)
-    driver.get('https://nationalpost.com/')
-    webnav.searchForNews("education", driver)
 
 def callback(event):
     print("You pressed Enter")
@@ -38,7 +21,14 @@ def callback(event):
     credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
     driver = webdriver.Chrome(credential_path)
     driver.get('https://nationalpost.com/')
-    webnav.searchForNews(noun_word, driver)
+    title_ld = webnav.searchForNews(noun_word[1], driver)
+    article_ls = webnav.select_news(title_ld, 0, driver)
+    split_art = webnav.split_article(article_ls)
+    for string in split_art:
+        tts.textToSpeech(string)
+
+
+
 
 
 root.bind('<Return>', callback)
