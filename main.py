@@ -32,13 +32,16 @@ def callback(event):
         info.title_ld = webnav.search_for_news(noun_word[1], info.driver)
         title_list = webnav.data_to_title_list(info.title_ld)
         count = 0
-        for title in title_list:
-            tts.textToSpeech(nums[count])
-            tts.textToSpeech(title)
-            count += 1
-            if (count == 2):
-                break
-            time.sleep(1)
+        try:
+            for title in title_list:
+                tts.textToSpeech(nums[count])
+                tts.textToSpeech(title)
+                count += 1
+                if (count == 2):
+                    break
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print("sound cancelled from keyboard interrupt")
 
 
     if (noun_word[0] in ['choose', 'select', 'read']):
