@@ -18,16 +18,36 @@ def callback(event):
     string_words = stt.speechToText()
     noun_word = stt.extractKeywords(string_words)
     print(noun_word)
-    credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
-    driver = webdriver.Chrome(credential_path)
-    driver.get('https://nationalpost.com/')
-    title_ld = webnav.search_for_news(noun_word[1], driver)
-    article_ls = webnav.select_news(title_ld, 0, driver)
-    for string in article_ls:
-        tts.textToSpeech(string)
+    nums = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen']
+    
+    if (noun_word[0] == 'open') {
+        credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
+        driver = webdriver.Chrome(credential_path)
+        driver.get('https://nationalpost.com/')
+    }
 
+    if (noun_word[0] == 'search') {
+        driver.get('https://nationalpost.com/')
+        title_ld = webnav.search_for_news(noun_word[1], driver)
+        title_list = webnav.data_to_title_list(title_ld)
+        count = 0
+        for title in title_list:
+            tts.textToSpeech(nums[count])
+            tts.textToSpeech(title)
+            count += 1
+            sleep(1)
+    }
 
+    if (noun_word[0] == 'read') {
+        index_news = nums.index(noun[1])
+        article_ls = webnav.select_news(title_ld, index_news, driver)
+        for string in article_ls:
+            tts.textToSpeech(string)
+    }
 
+    if (noun_word[0] == 'close') {
+        webnav.close_chrome(driver)
+    }
 
 
 root.bind('<Return>', callback)
@@ -44,7 +64,3 @@ canvas.pack()
 # runApps.pack()
 
 root.mainloop()
-
-with open('save.txt', 'w') as f:
-    for app in apps:
-        f.write(app + ',')
