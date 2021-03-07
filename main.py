@@ -21,7 +21,9 @@ def callback(event):
     print(noun_word)
     opened = False
     nums = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen']
-    
+    if (noun_word[0] == ""):
+        tts.textToSpeech("Sorry I didn't get that. Can you try again?")
+
     if (noun_word[0] == 'open'):
         opened = True
         info.setDriver()
@@ -31,7 +33,7 @@ def callback(event):
     if (noun_word[0] in ['search', 'look', 'find']):
         if (noun_word[1] == ""):
             tts.textToSpeech("Sorry I didn't get that. Can you try again?")
-        info.setDriver()
+        # info.setDriver()
         info.driver.get('https://nationalpost.com/')
         info.title_ld = webnav.search_for_news(noun_word[1], info.driver)
         title_list = webnav.data_to_title_list(info.title_ld)
@@ -45,7 +47,10 @@ def callback(event):
                 if (count == 2):
                     break
                 time.sleep(1)
+            
+            tts.textToSpeech("Which article would you like to read?")
         except KeyboardInterrupt:
+            tts.textToSpeech("Stopped reading. What would you like to do next?")
             print("sound cancelled from keyboard interrupt")
 
 
@@ -53,8 +58,12 @@ def callback(event):
         tts.textToSpeech("Great choice. Opening up article {}".format(noun_word[1]))
         index_news = int(noun_word[1])
         article_ls = webnav.select_news(info.title_ld, index_news, info.driver)
-        for string in article_ls:
-            tts.textToSpeech(string)
+        try:
+            for string in article_ls:
+                tts.textToSpeech(string)
+        except KeyboardInterrupt:
+            tts.textToSpeech("Stopped reading. What would you like to do next?")
+            print("sound cancelled from keyboard interrupt")
 
 
     if (noun_word[0] in ['stop', 'close']):
