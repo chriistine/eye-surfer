@@ -62,7 +62,7 @@ def select_news(title_link_data, selected_news_int, driver):
         article = split_article(article)
         return article
     else:
-        article_list.append(article) 
+        article_list.append(article)
         return article_list
     
 def split_article(article):
@@ -81,14 +81,23 @@ def split_article(article):
 
     return split_string
 
-
-def main():
+def open_chrome():
     driver = webdriver.Chrome(r'C:\Users\danie\dev\deltahacks\deltahacks2021\chromedriver.exe')
+    return driver
 
-    driver.get('https://nationalpost.com/')
-    data = search_for_news("vaccine", driver)
-    article = select_news(data, 0, driver)
-    #split_article(article)
+def close_chrome(driver):
+    driver.quit()
+
+    
+def main():
+    driver = open_chrome()
+    time.sleep(5)
+    close_chrome(driver)
+    time.sleep(5)
+    #driver.get('https://nationalpost.com/')
+    #data = search_for_news("boxing", driver)
+    #article = select_news(data, 0, driver)
+    #print(article)
 
 
 
