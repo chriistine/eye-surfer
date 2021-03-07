@@ -104,7 +104,7 @@ def extractKeywords(text: str):
         if ('VERB' in str(token.part_of_speech.tag) and token.text.content == 'describe'):
             describe = True
 
-        if ('VERB' in str(token.part_of_speech.tag) and (token.text.content == 'search' or token.text.content == 'look at' or token.text.content == 'find'):
+        if ('VERB' in str(token.part_of_speech.tag) and (token.text.content == 'search' or token.text.content == 'look at' or token.text.content == 'find')):
             search = True
         
         if (search == True and 'NOUN' in str(token.part_of_speech.tag)):
