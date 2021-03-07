@@ -41,7 +41,12 @@ def search_for_news(topic, driver):
     #print(title_link_data)
     return title_link_data
 
+def data_to_title_list(title_link_data):
+    title_list = []
+    for key in title_link_data:
+        title_list.append(title_link_data[key][0])
 
+    return title_list
 
 
 def select_news(title_link_data, selected_news_int, driver):
@@ -91,11 +96,12 @@ def close_chrome(driver):
     
 def main():
     driver = open_chrome()
-    time.sleep(5)
-    close_chrome(driver)
-    time.sleep(5)
-    #driver.get('https://nationalpost.com/')
-    #data = search_for_news("boxing", driver)
+    
+    driver.get('https://nationalpost.com/')
+    data = search_for_news("boxing", driver)
+    titles = data_to_title_list(data)
+    for title in titles:
+        print(title)
     #article = select_news(data, 0, driver)
     #print(article)
 
