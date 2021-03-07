@@ -26,7 +26,6 @@ def addApp():
 def runApps():
     credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
     driver = webdriver.Chrome(credential_path)
-
     driver.get('https://nationalpost.com/')
     webnav.searchForNews("education", driver)
 
@@ -36,6 +35,11 @@ def callback(event):
     string_words = stt.speechToText()
     noun_word = stt.extractKeywords(string_words)
     print(noun_word)
+    credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
+    driver = webdriver.Chrome(credential_path)
+    driver.get('https://nationalpost.com/')
+    webnav.searchForNews(noun_word, driver)
+
 
 root.bind('<Return>', callback)
 
