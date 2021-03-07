@@ -97,19 +97,24 @@ def extractKeywords(text: str):
     entities = langClient.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
 
     search = False
+    read = False
     noun = ""
     verb = ""
     for token in syntax.tokens:  
         # print(token)
         if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'select', 'open']):
+            read = True
             verb = token.text.content
 
         if ('VERB' in str(token.part_of_speech.tag) and (token.text.content in ['search', 'look at','find'])):
             verb = token.text.content
             search = True
+
+        if (read == True and 'NUM' in str(token.part_of_speech.tag)):
+            return [verb, token.text.content]
         
-        if (search == True and 'NOUN' in str(token.part_of_speech.tag)):
-            noun = token.text.content
+        if ((search == True or read == True) and 'NOUN' in str(token.part_of_speech.tag)):
+            noun = str(token.text.content)
 
     if (noun != ""):
         for entity in entities.entities:

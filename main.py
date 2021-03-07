@@ -35,19 +35,21 @@ def callback(event):
         # driver = webdriver.Chrome(credential_path)
         info.driver.get('https://nationalpost.com/')
         # driver.get('https://nationalpost.com/')
-        title_ld = webnav.search_for_news(noun_word[1], info.driver)
-        title_list = webnav.data_to_title_list(title_ld)
+        info.title_ld = webnav.search_for_news(noun_word[1], info.driver)
+        title_list = webnav.data_to_title_list(info.title_ld)
         count = 0
-        for title in 5:
+        for title in title_list:
             tts.textToSpeech(nums[count])
             tts.textToSpeech(title)
             count += 1
+            if (count == 2):
+                break
             time.sleep(1)
 
 
     if (noun_word[0] == 'read'):
-        index_news = nums.index(noun[1])
-        article_ls = webnav.select_news(title_ld, index_news, info.driver)
+        index_news = int(noun_word[1])
+        article_ls = webnav.select_news(info.title_ld, index_news, info.driver)
         for string in article_ls:
             tts.textToSpeech(string)
 
@@ -59,6 +61,7 @@ def callback(event):
 class Info:
     def __init__(self):
         self.driver = None
+        self.title_ld = ""
     
     def setDriver(self):
         credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')

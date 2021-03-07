@@ -45,7 +45,8 @@ def textToSpeech(text: str):
     pygame.mixer.music.play()
     while pygame.mixer.music.get_busy() == True:
         continue
-
+    
+     
     pygame.mixer.quit()
     
     out.close()
