@@ -62,7 +62,7 @@ def select_news(title_link_data, selected_news_int, driver):
         article = split_article(article)
         return article
     else:
-        article_list[0] = article 
+        article_list.append(article) 
         return article_list
     
 def split_article(article):
