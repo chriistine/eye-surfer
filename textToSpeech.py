@@ -49,6 +49,7 @@ def textToSpeech(text: str):
     except KeyboardInterrupt:
         print("Interrupted by User")
         pygame.mixer.music.stop()
+        raise KeyboardInterrupt
     
     pygame.mixer.quit()
     out.close()
