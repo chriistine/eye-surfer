@@ -12,6 +12,7 @@ def textToSpeech(text: str):
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
+    print(text)
     synthesis_input = texttospeech.SynthesisInput(text=text)
 
     # Build the voice request, select the language code ("en-US") and the ssml

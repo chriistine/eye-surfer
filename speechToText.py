@@ -97,15 +97,14 @@ def extractKeywords(text: str):
     entities = langClient.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
 
     search = False
-    describe = False
     noun = ""
     verb = ""
     for token in syntax.tokens:  
-        if ('VERB' in str(token.part_of_speech.tag) and token.text.content == 'describe'):
+        # print(token)
+        if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'select']):
             verb = token.text.content
-            describe = True
 
-        if ('VERB' in str(token.part_of_speech.tag) and (token.text.content == 'search' or token.text.content == 'look at' or token.text.content == 'find')):
+        if ('VERB' in str(token.part_of_speech.tag) and (token.text.content in ['search', 'look at','find'])):
             verb = token.text.content
             search = True
         
@@ -117,7 +116,13 @@ def extractKeywords(text: str):
             if (entity.name == noun):
                 entityType = language_v1.Entity.Type(entity.type_).name
                 salienceScore = entity.salience
-
     
     return [verb, noun]
 
+def main():
+    toAudioFile()
+    text = speechToText()
+    [verb, noun] = extractKeywords(text)
+
+if __name__ == "__main__":
+    main()
