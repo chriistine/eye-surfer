@@ -92,9 +92,9 @@ def extractKeywords(text: str):
     document = language_v1.Document(content=text, type_=language_v1.Document.Type.PLAIN_TEXT)
 
     # Types to analyze
-    sentiment = langClient.analyze_sentiment(request={'document': document}).document_sentiment
+    # sentiment = langClient.analyze_sentiment(request={'document': document}).document_sentiment
     syntax = langClient.analyze_syntax(request = {'document': document, 'encoding_type': encoding_type})
-    entities = langClient.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
+    # entities = langClient.analyze_entities(request = {'document': document, 'encoding_type': encoding_type})
 
     search = False
     read = False
