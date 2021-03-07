@@ -38,10 +38,15 @@ def textToSpeech(text: str):
         out.write(response.audio_content)
         # os.startfile('output.mp3')
         print('Audio content written to file "output.mp3"')
+        
 
     pygame.mixer.init()
     pygame.mixer.music.load("output.mp3")
     pygame.mixer.music.play()
-
     while pygame.mixer.music.get_busy() == True:
         continue
+
+    pygame.mixer.quit()
+    
+    out.close()
+    os.remove('output.mp3')

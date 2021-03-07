@@ -101,7 +101,7 @@ def extractKeywords(text: str):
     verb = ""
     for token in syntax.tokens:  
         # print(token)
-        if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'select']):
+        if ('VERB' in str(token.part_of_speech.tag) and token.text.content in ['select', 'close', 'read', 'select', 'open']):
             verb = token.text.content
 
         if ('VERB' in str(token.part_of_speech.tag) and (token.text.content in ['search', 'look at','find'])):
