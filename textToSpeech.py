@@ -5,7 +5,7 @@ import pygame
 def textToSpeech(text: str):
 
     # Get credentials
-    credential_path = os.path.join(os.path.dirname(__file__), './','deltahacks-306803-01a16b6b0a26.json')
+    credential_path = os.path.join(os.path.dirname(__file__), './','deltahacks-306907-4389058f0ce0.json')
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = credential_path
 
     # Instantiates a client
