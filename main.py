@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog, Text
 from tkinter import *
+from tkhtmlview import HTMLLabel
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import WebNavigation as webnav
@@ -65,10 +66,19 @@ class Info:
         self.driver = webdriver.Chrome(credential_path)
 
 info = Info()
+root.geometry("500x700")
+root.configure(background='white')
 root.bind('<Return>', callback)
 
-canvas = tk.Canvas(root, height=700, width=700, bg="black")
-canvas.pack()
+
+# canvas = tk.Canvas(root, height=700, width=700, bg="white")
+# canvas.pack()
+
+my_label = HTMLLabel(root, html='<img src="logo1.png" width="460" height="600" />')
+my_label['background']='white'
+my_label.pack()
+my_label.pack(pady=20, padx=20, fill="both", expand=True)
+
 
 # frame = tk.Frame(root, bg="white")
 # frame.place(relw=0.8, relheight=0.8, relx=0.1, rely=0.1)
