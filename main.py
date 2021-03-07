@@ -22,7 +22,8 @@ def addApp():
         label.pack()
 
 def runApps():
-    driver = webdriver.Chrome(r'')
+    credential_path = os.path.join(os.path.dirname(__file__), './','chromedriver.exe')
+    driver = webdriver.Chrome(credential_path)
 
     driver.get('https://nationalpost.com/')
     webnav.searchForNews("education", driver)
