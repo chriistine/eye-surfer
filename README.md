@@ -1,6 +1,9 @@
 # EyeSurfer
-![alt text](https://user-images.githubusercontent.com/59517368/118346519-23366580-b50a-11eb-97ff-7acfdef65f7c.png)
 Voice interactive assistant for visually impaired people or for those who want easier experience surfing the web.
+
+<p align="center">
+  <img width="460" height="350" src="https://user-images.githubusercontent.com/59517368/118346519-23366580-b50a-11eb-97ff-7acfdef65f7c.png">
+</p>
 
 ## Inspiration
 With the COVID-19 pandemic, we have been more reliant on the internet. However, the internet isn’t all friendly to everyone — especially to the visually impared. There are over 285 million visually impared people around the world, and with their disability it is very hard to search on the internet. EyeSurfer aims to tackle that problem using voice activated searching, so that the visually impaired can surf through the internet, but with their voice.
