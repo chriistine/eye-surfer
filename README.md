@@ -1,4 +1,5 @@
 # EyeSurfer
+![alt text](https://user-images.githubusercontent.com/59517368/118346519-23366580-b50a-11eb-97ff-7acfdef65f7c.png)
 Voice interactive assistant for visually impaired people or for those who want easier experience surfing the web.
 
 ## Inspiration
@@ -9,6 +10,8 @@ EyeSurfer allows users to use the internet, all with their voice. For example, t
 
 ## How we built it
 This application was built using python, and using the tkinter library for simple GUI display for user interaction. We used the Google Speech-to-text API to convert voice to text, and analyzed the text received using the Google Natural Languages API. Then the web automation/scraping is done through Selenium python scripts, which gets triggered based on the analyzed voice input from the user. Lastly, the results are returned to the user via Google's Text-to-Speech!
+
+![image](https://user-images.githubusercontent.com/59517368/118346533-4a8d3280-b50a-11eb-9754-2e1fddc03c64.png)
 
 ## Challenges we ran into
 Designing the overall architecture of our project, and integrating the parts together. Figuring out how to deliver our service to users.
