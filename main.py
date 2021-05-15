@@ -4,9 +4,11 @@ from tkinter import *
 from tkhtmlview import HTMLLabel
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import WebNavigation as webnav
-import speechToText as stt
-import textToSpeech as tts
+
+from .components.webNavigation import webNavigation as webnav
+from .components.speechToText import speechToText as stt
+from .components.textToSpeech import textToSpeech as tts
+
 import os
 import time
 
